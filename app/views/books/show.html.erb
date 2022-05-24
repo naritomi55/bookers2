@@ -2,7 +2,7 @@
   <p id="notice"></p>
   <div class="container">
     <div class="row">
-      <%= render 'users/user info', user: @user %>
+      <%= render 'users/user info', user: @book.user, book: @book_new %>
       <div class="col-md-8 offset-md-1">
         <h2>Book detail</h2>
         <table class="table">
@@ -24,10 +24,14 @@
                   <%= @book.body %>
                 </td>
                 <td>
-                  <a class="btn btn-sm btn-success" href="/books/<%= @book.id %>/edit">Edit</a>
+                  <% if @book.user == current_user %>
+                    <a class="btn btn-sm btn-success" href="/books/<%= @book.id %>/edit">Edit</a>
+                  <% end %>
                 </td>
                 <td>
-                  <a data-confirm="本当に消しますか？" class="btn btn-sm btn-danger" rel="nofollow" data-method="delete" href="/books/<%= @book.id %>">Destroy</a>
+                  <% if @book.user == current_user %>
+                    <a data-confirm="本当に消しますか？" class="btn btn-sm btn-danger" rel="nofollow" data-method="delete" href="/books/<%= @book.id %>">Destroy</a>
+                  <% end %>
                 </td>
               </tr>
           </tbody>
